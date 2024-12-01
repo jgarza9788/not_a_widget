@@ -1,0 +1,18 @@
+{
+    "light":{
+    "font_path": "fonts/FiraMonoNerdFontMono-Regular.otf",
+    "font_size": 30,
+    "image_size": [500, 500],
+    "bg_color": [255, 255, 255, 0],
+    "text_color": [0, 0, 0, 255],
+    "output_path": "image_light.png"
+    },
+    "dark":{
+        "font_path": "fonts/FiraMonoNerdFontMono-Regular.otf",
+        "font_size": 24,
+        "image_size": [400, 1000],
+        "bg_color": [255, 255, 255, 0],
+        "text_color": [255, 255, 255, 125],
+        "output_path": "image_dark.png"
+    }
+}
