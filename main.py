@@ -35,7 +35,16 @@ def create_image_with_text(text, font_path=None, font_size=12, image_size=[500, 
     print(f"Image saved as {output_path}")
 
 
-
+def drive_to_text(drive='/'):
+    result = ""
+    d = dd.get_drivedata(drive)
+    p = d['percent']*100
+    result += f" {drive} \n"
+    #result += f"{p:.2f}%".ljust(10) + "\n"
+    result += f"{p:.2f}% | {d['used_gb']:.0f}GB / {d['total_gb']:.0f}GB".ljust(20) + "\n"
+    result += f"{bar(p,100,length=20,fillchar="#", emptychar=" ")}\n"
+    result += "\n"
+    return result
 
 def main(theme='dark'):
     global DIR
@@ -46,41 +55,45 @@ def main(theme='dark'):
         font_path = os.path.join(DIR,configData["font_path"])
 
     text = ""
-    p_cpu = su.get_cpu_usage()
-    text += f" CPU: {p_cpu:.2f}%".ljust(10) + "\n"
-    text += f"{bar(p_cpu,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    text += drive_to_text('/')
+    text += drive_to_text('/media/jgarza/SSD')
+    text += drive_to_text('/media/jgarza/H00')
 
-    p_mu = su.get_memory_usage()
-    text += f" RAM: {p_mu:.2f}%".ljust(10) + "\n"
-    text += f"{bar(p_mu,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    # p_cpu = su.get_cpu_usage()
+    # text += f" CPU: {p_cpu:.2f}%".ljust(10) + "\n"
+    # text += f"{bar(p_cpu,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
 
-    p_gpu = su.get_gpu_usage()
-    text += f"󰢮 GPU: {p_gpu:.2f}%".ljust(10) + "\n"
-    text += f"{bar(p_gpu,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    # p_mu = su.get_memory_usage()
+    # text += f" RAM: {p_mu:.2f}%".ljust(10) + "\n"
+    # text += f"{bar(p_mu,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
 
-    d_root = dd.get_drivedata('/')
-    p_root = d_root['percent']*100
-    text += f" /    : {p_root:.2f}%".ljust(10) + "\n"
-    text += f"{d_root['used_gb']:.2f}GB / {d_root['total_gb']:.2f}GB".ljust(20) + "\n"
-    text += f"{bar(p_root,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    # p_gpu = su.get_gpu_usage()
+    # text += f"󰢮 GPU: {p_gpu:.2f}%".ljust(10) + "\n"
+    # text += f"{bar(p_gpu,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
 
-    d_ssd = dd.get_drivedata('/media/jgarza/SSD')
-    p_ssd = d_ssd['percent']*100
-    text += f" SSD  : {p_ssd:.2f}%".ljust(10) + "\n"
-    text += f"{d_ssd['used_gb']:.2f}GB / {d_ssd['total_gb']:.2f}GB".ljust(20) + "\n"
-    text += f"{bar(p_ssd,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    # d_root = dd.get_drivedata('/')
+    # p_root = d_root['percent']*100
+    # text += f" /    : {p_root:.2f}%".ljust(10) + "\n"
+    # text += f"{d_root['used_gb']:.2f}GB / {d_root['total_gb']:.2f}GB".ljust(20) + "\n"
+    # text += f"{bar(p_root,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
 
-    d_h00 = dd.get_drivedata('/media/jgarza/H00')
-    p_h00 = d_h00['percent']*100
-    text += f" H00  : {p_h00:.2f}%".ljust(10) + "\n"
-    text += f"{d_h00['used_gb']:.2f}GB / {d_h00['total_gb']:.2f}GB".ljust(20) + "\n"
-    text += f"{bar(p_h00,100,length=20,fillchar="#", emptychar=" ")}\n"
-    text += ""*20 + "\n"
+    # d_ssd = dd.get_drivedata('/media/jgarza/SSD')
+    # p_ssd = d_ssd['percent']*100
+    # text += f" SSD  : {p_ssd:.2f}%".ljust(10) + "\n"
+    # text += f"{d_ssd['used_gb']:.2f}GB / {d_ssd['total_gb']:.2f}GB".ljust(20) + "\n"
+    # text += f"{bar(p_ssd,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
+
+    # d_h00 = dd.get_drivedata('/media/jgarza/H00')
+    # p_h00 = d_h00['percent']*100
+    # text += f" H00  : {p_h00:.2f}%".ljust(10) + "\n"
+    # text += f"{d_h00['used_gb']:.2f}GB / {d_h00['total_gb']:.2f}GB".ljust(20) + "\n"
+    # text += f"{bar(p_h00,100,length=20,fillchar="#", emptychar=" ")}\n"
+    # text += ""*20 + "\n"
 
 
     # text += f" CPU: {p_cpu:.2f}% {bar(p_cpu,100,length=10)}\n"
